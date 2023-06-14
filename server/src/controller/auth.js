@@ -1,7 +1,11 @@
-import { User } from "../db/schema/User";
+import { User } from "../db";
 import logger from "../logger";
-import { generateResetToken, verifyResetToken } from "../utils/token";
-import { hashPassword } from "../utils/auth.utils";
+import {
+  generateResetToken,
+  verifyResetToken,
+  generateAuthToken,
+} from "../utils/token";
+import { hashPassword, checkPass } from "../utils/auth.utils";
 
 export const signup = async (req, res, next) => {
   try {
@@ -38,10 +42,53 @@ export const signup = async (req, res, next) => {
     });
   }
 };
+
+export const signin = async (req, res, next) => {
+  try {
+    const { email, password } = req.body;
+    const user = await User.findOne({ email });
+    if (!user) {
+      res.status(400).json({
+        message: "User not found",
+        success: false,
+      });
+    }
+    const isCorrectPassword = await checkPass(password, user.password);
+    if (!isCorrectPassword) {
+      res.status(400).json({
+        message: "Invalid user details",
+        success: false,
+      });
+    }
+    console.log("user id ", user.id);
+    const token = generateAuthToken({
+      id: user.id,
+      email: email,
+      role: user.role,
+    });
+    console.log(token, "token");
+    return res
+      .cookie("access_token", token, {
+        httpOnly: true,
+      })
+      .status(200)
+      .json({
+        message: "logged in succesfully",
+        success: true,
+      });
+  } catch (error) {
+    res.status(500).json({
+      message: error.message,
+      success: false,
+      data: null,
+    });
+  }
+};
 export const resetPassword = async (req, res, next) => {
   try {
     // check if user exists in the DB
-    let userExists = true;
+    const { email } = req.body;
+    userExists = await User.findOne({ emial });
     if (!userExists) {
       return res.status(400).json({
         message: "User does not exist",
@@ -51,7 +98,7 @@ export const resetPassword = async (req, res, next) => {
     }
     // generate a token and send email
     const token = generateResetToken({
-      email: "abc@mail.com",
+      email: email,
     });
     const resetPasswordLink = `http://localhost:3000/reset-password/${token}`;
     // send the email
@@ -62,6 +109,10 @@ export const resetPassword = async (req, res, next) => {
     });
   } catch (error) {
     logger.log(error);
+    return res.status(500).json({
+      message: "internal server error",
+      success: false,
+    });
   }
 };
 
@@ -79,7 +130,7 @@ export const changePassword = async (req, res, next) => {
       });
     }
     const { email } = payload;
-    const user = {};
+    const user = await User.findOne({ email });
     //! redundant code
     if (!user) {
       return res.status(400).json({
@@ -89,10 +140,9 @@ export const changePassword = async (req, res, next) => {
       });
     }
     // update the password
-    const hashEdPassword = "hashed password";
+    const hashEdPassword = hashPassword(password);
     user.password = hashEdPassword;
-    // save the user
-    // send email
+
     return res.status(200).json({
       message: "Password updated successfully",
       success: true,
@@ -100,5 +150,9 @@ export const changePassword = async (req, res, next) => {
     });
   } catch (error) {
     logger.log(error);
+    return res.status(500).json({
+      message: "Internal server error",
+      success: false,
+    });
   }
 };
