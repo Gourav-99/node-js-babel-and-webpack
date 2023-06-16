@@ -1,5 +1,6 @@
 import { verifyAuthToken } from "../utils/token";
 import { Post, Comment } from "../db";
+
 export const accessPermission = (allowedRoles) => {
   return (req, res, next) => {
     try {

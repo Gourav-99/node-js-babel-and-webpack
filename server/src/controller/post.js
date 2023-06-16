@@ -11,7 +11,6 @@ export const getPosts = async (req, res) => {
       .skip(offset)
       .sort({ createdAt: -1 })
       .populate("user", "firstName lastName email profilePicture")
-      //   .populate("comments", "commentText user");
       .populate({
         path: "comments",
         populate: {
