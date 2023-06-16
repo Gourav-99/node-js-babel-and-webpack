@@ -50,3 +50,7 @@
 {"code":"ERR_HTTP_HEADERS_SENT","level":"\u001b[31merror\u001b[39m","timestamp":"2023-06-14 12:18:08"}
 {"code":"ERR_HTTP_HEADERS_SENT","level":"\u001b[31merror\u001b[39m","timestamp":"2023-06-14 12:24:37"}
 {"level":"\u001b[31merror\u001b[39m","path":"user","timestamp":"2023-06-14 14:24:25"}
+{"code":"ERR_HTTP_HEADERS_SENT","level":"\u001b[31merror\u001b[39m","timestamp":"2023-06-15 22:00:09"}
+{"code":"ERR_HTTP_HEADERS_SENT","level":"\u001b[31merror\u001b[39m","timestamp":"2023-06-15 22:00:54"}
+{"code":"ERR_HTTP_HEADERS_SENT","level":"\u001b[31merror\u001b[39m","timestamp":"2023-06-15 22:01:25"}
+{"level":"\u001b[31merror\u001b[39m","path":"comments","timestamp":"2023-06-16 10:26:12"}

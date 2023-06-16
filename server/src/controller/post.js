@@ -93,3 +93,32 @@ export const deletePost = async (req, res) => {
     });
   }
 };
+
+export const likePost = async (req, res, next) => {
+  try {
+    const { id: userId } = req.user;
+    const { id } = req.params;
+    // addtoset pushesh only unique user to the array
+    const updatedPostLike = await Post.findByIdAndUpdate(
+      id,
+      {
+        $addToSet: {
+          likes: userId,
+        },
+      },
+      {
+        new: true,
+      }
+    );
+    return res.status(200).json({
+      message: "post liked successfully",
+      success: true,
+      data: updatedPostLike,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      message: error.message,
+      success: false,
+    });
+  }
+};

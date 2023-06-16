@@ -22,10 +22,10 @@ app.use(cors());
 app.use(express.json());
 app.use(cookieParser());
 app.use(morganMiddleware);
-app.use("/auth", authRoute);
+app.use("/auth", authMiddleware, authRoute);
 app.use("/post", authMiddleware, postRoute);
 app.use("/comment", authMiddleware, commentRoute);
-app.use("/admin", adminRoutes);
+app.use("/admin", authMiddleware, adminRoutes);
 app.get("/", (req, res) => {
   res.send(`Server is running `);
 });

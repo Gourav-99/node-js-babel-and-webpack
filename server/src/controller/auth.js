@@ -53,6 +53,12 @@ export const signin = async (req, res, next) => {
         success: false,
       });
     }
+    if (user.disabled) {
+      return res.status(400).json({
+        message: "disabled user",
+        success: false,
+      });
+    }
     const isCorrectPassword = await checkPass(password, user.password);
     if (!isCorrectPassword) {
       res.status(400).json({

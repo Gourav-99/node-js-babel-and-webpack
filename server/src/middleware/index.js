@@ -1,5 +1,24 @@
 import { verifyAuthToken } from "../utils/token";
 import { Post, Comment } from "../db";
+export const accessPermission = (allowedRoles) => {
+  return (req, res, next) => {
+    try {
+      const { role } = req.user;
+      if (allowedRoles.includes(role)) {
+        return next();
+      }
+      res.status(401).json({
+        message: "Unauthorised User",
+        success: false,
+      });
+    } catch (error) {
+      return res.status(500).json({
+        message: error.message,
+        success: false,
+      });
+    }
+  };
+};
 export const authMiddleware = (req, res, next) => {
   const token = req.cookies.access_token;
 
