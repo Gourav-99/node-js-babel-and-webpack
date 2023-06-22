@@ -1,38 +1,20 @@
 import React, { useState } from "react";
 import Header from "./components/Header";
 import List from "./components/List";
-import Footer from "./components/Footer";
 
 const App = () => {
-  let [count, setCount] = useState(0);
 
-  const handleInc = () => {
-    setCount((prev) => prev + 1);
+  const [todos,setTodos] = useState([]);
+  const [inputValue, setInputValue]= useState('');
+  const [currentEditItem, setEditItem]= useState('');
+  // const [addBtn, setAddBtn]= useState('');
+  // const [editBtn, setEditBtn]= useState('hidden');
+  const [isEditMode, setIsEditMode] = useState(false);
 
-    console.log(count);
-  };
-
-  const handleDec = () => {
-    setCount((prev) => prev - 1);
-
-    console.log(count);
-  };
-  const [todos, setTodos] = useState([]);
-
-  const addTodo = (todo) => {
-    setTodos([...todos, todo]);
-  };
   return (
     <div>
-      <button onClick={handleDec}>-</button>
-      <h1>{count}</h1>          
-      <button onClick={handleInc}>+</button>
-      <button onClick={() => addTodo("this is an item")}>Add</button>
-      <ul>
-        {todos.map((todo, index) => (
-          <li key={index}>{todo}</li>
-        ))}
-      </ul>
+      <Header todos={todos} setTodos= {setTodos}  inputValue={inputValue} setInputValue={setInputValue} isEditMode={isEditMode} setIsEditMode={setIsEditMode} currentEditItem={currentEditItem}/>
+      <List todos={todos} setTodos={setTodos} setInputValue={setInputValue} isEditMode={isEditMode} setIsEditMode={setIsEditMode} setEditItem={setEditItem}/>
     </div>
   );
 };
