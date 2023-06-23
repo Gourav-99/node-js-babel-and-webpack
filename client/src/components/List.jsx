@@ -1,57 +1,63 @@
 import React from "react";
-const List = ({ todos, setTodos, setInputValue,isEditMode,setIsEditMode, setEditItem}) => {
-  const handleComplete=(id)=>{
-    let updateTodo = todos.find((todo)=> todo.id===id);
-    updateTodo.isComplete = !updateTodo.isComplete;
-    setTodos((prevTodos)=> [...prevTodos])
-  }
-const handleDelete=(id)=>{
-  setTodos((prevTodos)=>{
-    return prevTodos.filter((todo)=> todo.id!==id)
-  })
-}
-const handleEdit =(id)=>{
-  // setAddBtn('hidden');
-  // setEditBtn('')
-  setIsEditMode(!isEditMode)
-  let updateTodo = todos.find((todo)=>todo.id===id);
-  setEditItem(updateTodo.id);
-  setInputValue(updateTodo.title);
-}
-  // const todos = todos
+const List = ({
+  todos,
+  setTodos,
+  setInputValue,
+  isEditMode,
+  setIsEditMode,
+  setEditItem,
+  handleComplete,
+  handleDelete,
+  handleEdit,
+}) => {
   return (
     <section>
-      
-        {todos && todos.map((todo, index) => {
+      {todos &&
+        todos.map((todo, index) => {
           return (
             <div
               key={index}
               className="flex justify-between items-center border-b border-slate-200 py-3 px-2 border-l-4 border-l-transparent"
             >
               <div className="inline-flex items-center space-x-2">
-                <div className="check-complete" onClick={()=>handleComplete(todo.id)}>
+                <div
+                  className="check-complete"
+                  onClick={() => handleComplete(todo.id)}
+                >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
                     viewBox="0 0 24 24"
                     strokeWidth="1.5"
                     stroke="currentColor"
-                    className={`w-6 h-6 text-${todo.isComplete ? 'slate':'green'}-500`}
+                    className={`w-6 h-6 text-${
+                      todo.isComplete ? "slate" : "green"
+                    }-500`}
                   >
                     <path
                       strokeLinecap="round"
                       strokeLinejoin="round"
-                      d="M4.5 12.75l6 6 9-13.5"
+                      d={
+                        todo.isComplete
+                          ? "M4.5 12.75l6 6 9-13.5"
+                          : "M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                      }
                     />
                   </svg>
                 </div>
-                <div className={`text-slate-500 ${todo.isComplete && "line-through"}`}>
-                    {todo.title}
+                <div
+                  className={`text-slate-500 ${
+                    todo.isComplete && "line-through"
+                  }`}
+                >
+                  {todo.title}
                 </div>
-                
               </div>
               <div className="flex justify-between">
-                <div className="edit-btn mx-2" onClick={()=> handleEdit(todo.id)}>
+                <div
+                  className="edit-btn mx-2"
+                  onClick={() => handleEdit(todo.id)}
+                >
                   <svg
                     className="w-4 h-4 fill-current text-gray-500 hover:text-blue-700 hover:cursor-pointer"
                     viewBox="0 0 20 20"
@@ -68,7 +74,10 @@ const handleEdit =(id)=>{
                     </g>
                   </svg>
                 </div>
-                <div className="remove-icon" onClick={()=>handleDelete(todo.id)}>
+                <div
+                  className="remove-icon"
+                  onClick={() => handleDelete(todo.id)}
+                >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
@@ -88,10 +97,9 @@ const handleEdit =(id)=>{
             </div>
           );
         })}
-        {
-          todos.length === 0 && 
-          <p className="list-state text-slate-500">EMPTY LIST</p>
-        }
+      {todos.length === 0 && (
+        <p className="list-state text-slate-500">EMPTY LIST</p>
+      )}
     </section>
   );
 };

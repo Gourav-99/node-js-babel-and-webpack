@@ -7,9 +7,8 @@ const Header = ({
   setInputValue,
   isEditMode,
   setIsEditMode,
-  currentEditItem
+  currentEditItem,
 }) => {
-
   const handleSubmit = (e) => {
     setTodos((prevTodos) => [
       ...prevTodos,
@@ -19,14 +18,16 @@ const Header = ({
         isComplete: false,
       },
     ]);
+    setInputValue("");
   };
 
-  const handleEdit=(e)=>{
-    let updateTodo = todos.find((todo)=>todo.id===currentEditItem);
-    updateTodo.title = inputValue
-    setTodos((prevTodos)=>[...prevTodos])
-    setIsEditMode(!isEditMode)
-  }
+  const handleEdit = (e) => {
+    let updateTodo = todos.find((todo) => todo.id === currentEditItem);
+    updateTodo.title = inputValue;
+    setTodos((prevTodos) => [...prevTodos]);
+    setIsEditMode(!isEditMode);
+    setInputValue("");
+  };
   const handleChange = (e) => {
     setInputValue(e.target.value);
   };
@@ -46,14 +47,14 @@ const Header = ({
         />
         {isEditMode ? (
           <button
-           onClick={handleEdit}
+            onClick={handleEdit}
             className={` text-white absolute right-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800`}
           >
             Edit
           </button>
         ) : (
           <button
-          onClick={handleSubmit}
+            onClick={handleSubmit}
             className={` text-white absolute right-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800`}
           >
             Add
