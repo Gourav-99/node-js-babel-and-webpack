@@ -1,37 +1,21 @@
 import React, { useState } from "react";
-import Header from "./components/Header";
-import List from "./components/List";
+import Home from "./components/Home";
+import Posts from "./components/Posts";
+import Timer from "./components/Timer";
+import Navabar from "./layout/Navbar";
+import Clicks from "./components/Clicks";
 
 const App = () => {
-
-  const [todos,setTodos] = useState([]);
-  const [inputValue, setInputValue]= useState('');
-  const [currentEditItem, setEditItem]= useState('');
-  const [isEditMode, setIsEditMode] = useState(false);
-
-  const handleComplete = (id) => {
-    let updateTodo = todos.find((todo) => todo.id === id);
-    updateTodo.isComplete = !updateTodo.isComplete;
-    setTodos((prevTodos) => [...prevTodos]);
-  };
-  const handleDelete = (id) => {
-    setTodos((prevTodos) => {
-      return prevTodos.filter((todo) => todo.id !== id);
-    });
-  };
-  const handleEdit = (id) => {
-    setIsEditMode(!isEditMode);
-    let updateTodo = todos.find((todo) => todo.id === id);
-    setEditItem(updateTodo.id);
-    setInputValue(updateTodo.title);
-  };
-
-  return (
+  const [view,setView] = useState("home");
+  const changeView = (view)=>setView(view);
+  return ( 
     <div>
-      <Header todos={todos} setTodos= {setTodos}  inputValue={inputValue} setInputValue={setInputValue} isEditMode={isEditMode} setIsEditMode={setIsEditMode} currentEditItem={currentEditItem}/>
-      <List todos={todos} setTodos={setTodos} setInputValue={setInputValue} isEditMode={isEditMode} setIsEditMode={setIsEditMode} setEditItem={setEditItem} handleComplete={handleComplete} handleDelete={handleDelete} handleEdit={handleEdit}/>
+      <Navabar changeView={changeView} />
+      {
+        view === "home" ? <Home/> : view === "posts" ? <Posts/> : view === "timer"? <Timer/>: <Clicks/>
+      }
     </div>
-  );
-};
-
+   );
+}
+ 
 export default App;
