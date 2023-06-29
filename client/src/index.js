@@ -4,7 +4,7 @@ import App from "./App";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <React.StrictMode>
+  <div className="relative w-full bg-yellow-50">
     <App />
-  </React.StrictMode>
+  </div>
 );
