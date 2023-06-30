@@ -1,97 +1,61 @@
 import React from "react";
+import { Link } from "react-router-dom";
 const Navbar = () => {
   return (
-    <nav className="fixed z-10 w-full bg-white md:absolute md:bg-transparent">
-      <div className="container m-auto px-2 md:px-12 lg:px-7">
-        <div className="flex flex-wrap items-center justify-between py-3 gap-6 md:py-4 md:gap-0">
-          <div className="w-full px-6 flex justify-between lg:w-max md:px-0">
-            <a
-              href="https://tailus.io/blocks/hero-section"
-              aria-label="logo"
-              className="flex space-x-2 items-center"
-            >
-              <img
-                src="https://tailus.io/sources/blocks/food-delivery/preview/images/icon.png"
-                className="w-12"
-                alt="tailus logo"
-                width="144"
-                height="133"
-              />
-              <span className="text-2xl font-bold text-yellow-900">
-                Plateful{" "}
-              </span>
-              <span className="text-yellow-700">Palate</span>
-            </a>
-
-            <button
-              aria-label="humburger"
-              id="hamburger"
-              className="relative w-10 h-10 -mr-2 lg:hidden"
-            >
-              <div
-                aria-hidden="true"
-                id="line"
-                className="inset-0 w-6 h-0.5 m-auto rounded bg-yellow-900 transtion duration-300"
-              ></div>
-              <div
-                aria-hidden="true"
-                id="line2"
-                className="inset-0 w-6 h-0.5 mt-2 m-auto rounded bg-yellow-900 transtion duration-300"
-              ></div>
-            </button>
-          </div>
-
-          <div className="hidden w-full lg:flex flex-wrap justify-end items-center space-y-6 p-6 rounded-xl bg-white md:space-y-0 md:p-0 md:flex-nowrap md:bg-transparent lg:w-7/12">
-            <div className="text-gray-600 lg:pr-4">
-              <ul className="space-y-6 tracking-wide font-medium text-sm md:flex md:space-y-0">
-                <li>
-                  <a
-                    href="#"
-                    className="block md:px-4 transition hover:text-yellow-700"
-                  >
-                    <span>I've a restaurant</span>
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="block md:px-4 transition hover:text-yellow-700"
-                  >
-                    <span>Wishlist</span>
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="block md:px-4 transition hover:text-yellow-700"
-                  >
-                    <span>Cart</span>
-                  </a>
-                </li>
-              </ul>
-            </div>
-
-            <div className="w-full space-y-2 border-yellow-200 lg:space-y-0 md:w-max lg:border-l">
-              <button
-                type="button"
-                title="Start buying"
-                className="w-full py-3 px-6 text-center rounded-full transition active:bg-yellow-200 focus:bg-yellow-100 sm:w-max"
+    <nav class="bg-white border-gray-200 dark:bg-gray-900">
+      <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+        <a href="https://flowbite.com/" class="flex items-center">
+          <img
+            src="https://flowbite.com/docs/images/logo.svg"
+            class="h-8 mr-3"
+            alt="Flowbite Logo"
+          />
+          <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
+            Flowbite
+          </span>
+        </a>
+        <button
+          data-collapse-toggle="navbar-default"
+          type="button"
+          class="inline-flex items-center p-2 ml-3 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+          aria-controls="navbar-default"
+          aria-expanded="false"
+        >
+          <span class="sr-only">Open main menu</span>
+          <svg
+            class="w-6 h-6"
+            aria-hidden="true"
+            fill="currentColor"
+            viewBox="0 0 20 20"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+              clip-rule="evenodd"
+            ></path>
+          </svg>
+        </button>
+        <div class="hidden w-full md:block md:w-auto" id="navbar-default">
+          <ul class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+            <li>
+              <Link
+                to={"/"}
+                class="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white md:dark:text-blue-500"
+                aria-current="page"
               >
-                <span className="block text-yellow-800 font-semibold text-sm">
-                  Sign up
-                </span>
-              </button>
-              <button
-                type="button"
-                title="Start buying"
-                className="w-full py-3 px-6 text-center rounded-full transition bg-yellow-300 hover:bg-yellow-100 active:bg-yellow-400 focus:bg-yellow-300 sm:w-max"
+                Home
+              </Link>
+            </li>
+            <li>
+              <Link
+                to={"/About"}
+                class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
               >
-                <span className="block text-yellow-900 font-semibold text-sm">
-                  Login
-                </span>
-              </button>
-            </div>
-          </div>
+                About
+              </Link>
+            </li>
+          </ul>
         </div>
       </div>
     </nav>
