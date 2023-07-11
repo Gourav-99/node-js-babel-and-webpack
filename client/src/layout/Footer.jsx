@@ -3,10 +3,10 @@ import React from "react";
 import { Link } from "react-router-dom";
 const Footer = () => {
   return (
-    <footer className="mx-auto  w-full max-w-container px-4 sm:px-6 lg:px-8">
-      <div className="border-t border-slate-900/5 py-5">
+    <footer className="mx-auto w-full max-w-container px-4 sm:px-6 lg:px-8">
+      <div className="border-t border-slate-900/5 py-2">
         <svg
-          className="mx-auto h-12 w-auto text-slate-900"
+          className="mx-auto h-10 w-auto text-slate-900"
           aria-hidden="true"
           viewBox="0 0 24 24"
           fill="none"
@@ -40,10 +40,10 @@ const Footer = () => {
             {"{"}" "{"}"}
           </g>
         </svg>
-        <p className="mt-3 text-center text-sm leading-6 text-slate-500">
+        <p className="mt-2 text-center text-sm leading-6 text-slate-500">
           © 2023 Tailwind Labs Inc. All rights reserved.
         </p>
-        <div className="mt-4 flex items-center justify-center space-x-4 text-sm font-semibold leading-6 text-slate-700">
+        <div className="mt-2 flex items-center justify-center space-x-4 text-sm font-semibold leading-6 text-slate-700">
           <Link to="/privacy-policy">Privacy policy</Link>
           <div className="h-4 w-px bg-slate-500/20" />
           <Link to="/changelog">Changelog</Link>

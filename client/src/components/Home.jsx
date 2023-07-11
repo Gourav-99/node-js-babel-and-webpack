@@ -35,7 +35,7 @@ const Home = ({ state: { token } }) => {
         </div>
         <div>
           <img
-            className="p-10 w-8/12 m-auto"
+            className="p-6 w-8/12 m-auto"
             src="https://img.freepik.com/free-vector/check-list-with-businessman-flat-design_79603-145.jpg?w=740&t=st=1688538517~exp=1688539117~hmac=6964d9fdd2d0a42d06f3030b9f3c5ce62a5ae3148f58584b86f2568566e2ac0a"
             alt="Todo List"
           />

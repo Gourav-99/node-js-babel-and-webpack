@@ -16,7 +16,6 @@ const App = () => {
     user: null,
     token: null,
   });
-  const [page, setPage] = useState("");
 
   useEffect(() => {
     validateAuth();
@@ -40,7 +39,7 @@ const App = () => {
   };
   return (
     <div>
-      <Navbar page={page} setState={setState} />
+      <Navbar state={state} setState={setState} />
       <Routes>
         <Route path="/" element={<Home state={state} />} />
         <Route path="/signup" element={<Signup state={state} />} />
@@ -50,9 +49,7 @@ const App = () => {
         />
         <Route
           path="/todos"
-          element={
-            <TodoList state={state} setState={setState} setPage={setPage} />
-          }
+          element={<TodoList state={state} setState={setState} />}
         />
         <Route path="*" element={<NotFound />} />
       </Routes>

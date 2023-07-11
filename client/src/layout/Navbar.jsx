@@ -1,11 +1,16 @@
+import axios from "axios";
 import React from "react";
 import { Link } from "react-router-dom";
-import Cookies from "universal-cookie";
-const cookies = new Cookies();
-const Navbar = ({ page, setState }) => {
-  const handleLogout = () => {
-    cookies.remove("access_token");
-    setState({ token: null, user: null });
+import { useNavigate } from "react-router";
+const Navbar = ({ state: { token, user }, setState, userName }) => {
+  const navigate = useNavigate();
+  const handleLogout = async () => {
+    const logout = await axios.get("/logout");
+    if (logout.status === 200) {
+      setState({ token: null, user: null });
+      alert("logged out successfully!");
+      navigate("/");
+    }
   };
   return (
     <header className="sticky top-0 z-[100] drop-shadow-md bg-white w-full flex-none text-sm font-semibold leading-6 text-slate-900">
@@ -58,6 +63,11 @@ const Navbar = ({ page, setState }) => {
               TodoList{" "}
             </span>
           </Link>
+          {user && user.userName && (
+            <div className="text-center mr-auto text-purple-900">
+              <h1 className="uppercase">welcome, {user.userName}</h1>
+            </div>
+          )}
           <div className="hidden lg:flex lg:items-center">
             <Link to="/contact">Contact</Link>
             <Link className="ml-8" to="/templates">
@@ -84,7 +94,7 @@ const Navbar = ({ page, setState }) => {
             </svg>
           </button>
           <div className="hidden lg:ml-8 lg:flex lg:items-center lg:border-l lg:border-slate-900/15 lg:pl-8">
-            {page === "todos" ? (
+            {token ? (
               <button
                 onClick={handleLogout}
                 className="inline-flex justify-center rounded-lg text-sm font-semibold py-3 px-5 bg-slate-900 text-white hover:bg-slate-700 -my-2.5 ml-8"

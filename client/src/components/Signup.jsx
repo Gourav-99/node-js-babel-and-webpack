@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import axios from "axios";
-const Signup = ({ state: { token, user } }) => {
+const Signup = ({ state: { token } }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -41,7 +41,7 @@ const Signup = ({ state: { token, user } }) => {
   };
   return (
     <section className="bg-gray-50 signup-section dark:bg-gray-900">
-      <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
+      <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto  lg:py-2">
         <a
           href="/no"
           className="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white"
@@ -66,7 +66,7 @@ const Signup = ({ state: { token, user } }) => {
               <div>
                 <label
                   htmlFor="email"
-                  className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                  className="block  text-sm font-medium text-gray-900 dark:text-white"
                 >
                   Your email
                 </label>
@@ -76,7 +76,7 @@ const Signup = ({ state: { token, user } }) => {
                   type="email"
                   name="email"
                   id="email"
-                  className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full px-2.5 py-1.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   placeholder="name@gmail.com"
                   required=""
                 />
@@ -84,7 +84,7 @@ const Signup = ({ state: { token, user } }) => {
               <div>
                 <label
                   htmlFor="firstName"
-                  className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                  className="block  text-sm font-medium text-gray-900 dark:text-white"
                 >
                   First name
                 </label>
@@ -94,7 +94,7 @@ const Signup = ({ state: { token, user } }) => {
                   type="text"
                   name="name"
                   id="firstName"
-                  className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full px-2.5 py-1.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   placeholder="John doe"
                   required=""
                 />
@@ -102,7 +102,7 @@ const Signup = ({ state: { token, user } }) => {
               <div>
                 <label
                   htmlFor="lastName"
-                  className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                  className="block  text-sm font-medium text-gray-900 dark:text-white"
                 >
                   Last name
                 </label>
@@ -112,7 +112,7 @@ const Signup = ({ state: { token, user } }) => {
                   type="text"
                   name="name"
                   id="lastName"
-                  className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full px-2.5 py-1.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   placeholder="John doe"
                   required=""
                 />
@@ -120,7 +120,7 @@ const Signup = ({ state: { token, user } }) => {
               <div>
                 <label
                   htmlFor="password"
-                  className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                  className="block  text-sm font-medium text-gray-900 dark:text-white"
                 >
                   Password
                 </label>
@@ -131,7 +131,7 @@ const Signup = ({ state: { token, user } }) => {
                   name="password"
                   id="password"
                   placeholder="••••••••"
-                  className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full px-2.5 py-1.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   required=""
                 />
               </div>

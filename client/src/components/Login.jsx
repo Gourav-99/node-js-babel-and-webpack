@@ -36,13 +36,15 @@ const Login = ({ state: { token, user }, setState }) => {
         }
       );
 
-      console.log("token", token, "user", user);
+      // console.log("token", token, "user", user);
 
       // axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
       // localStorage.setItem("access_token", token);
       setState({ token, user });
       if (status === 200) {
         navigate("/todos");
+      } else {
+        alert("!invalid credentials");
       }
     } catch (error) {
       console.log("error", error);
@@ -52,7 +54,7 @@ const Login = ({ state: { token, user }, setState }) => {
   };
   return (
     <section className="bg-gray-50 login-section dark:bg-gray-900">
-      <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
+      <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto  lg:py-2">
         <Link
           to="/"
           className="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white"

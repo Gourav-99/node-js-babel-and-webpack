@@ -5,14 +5,13 @@ import axios from "axios";
 import Header from "../pages/Header";
 import List from "../pages/List";
 
-const TodoList = ({ state: { token, user }, setState, setPage }) => {
+const TodoList = ({ state: { token, user }, setState }) => {
   const navigate = useNavigate();
   const [todos, setTodos] = useState([]);
   const [inputValue, setInputValue] = useState("");
   const [currentEditItem, setEditItem] = useState("");
   const [isEditMode, setIsEditMode] = useState(false);
   useEffect(() => {
-    setPage("todos");
     if (!token) {
       navigate("/login");
     }

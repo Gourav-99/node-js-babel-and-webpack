@@ -1,11 +1,7 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React from "react";
 
-import Cookies from "universal-cookie";
-
-const cookies = new Cookies();
 const Header = ({
-  setState,
   todos,
   setTodos,
   inputValue,
@@ -46,7 +42,7 @@ const Header = ({
         <div>
           <h1 className="text-3xl font-medium">Todo list</h1>
         </div>
-        <div className="relative w-full my-3">
+        <div className="relative w-full my-2">
           <input
             onChange={handleChange}
             value={inputValue}
@@ -77,13 +73,6 @@ const Header = ({
           )}
         </div>
       </div>
-      {/* <List todos={todos} handleComplete={handleComplete} /> */}
-      {/* <p className="list-state text-slate-500">EMPTY LIST</p>
-        <div id="todo-container" />
-        <p className="text-xs text-slate-500 text-center">
-          Last updated
-          <span id="last-updated" />
-        </p> */}
     </>
   );
 };
