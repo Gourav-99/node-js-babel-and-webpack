@@ -10,20 +10,18 @@ import { authMiddleware } from "./middleware";
 import { verifyAuthToken } from "./utils/token";
 const app = express();
 const PORT = 8080;
-
-app.use(
-  cors({
-    origin: "http://localhost:3000",
-    credentials: true,
-  })
-);
+const corsOptions = {
+  origin: "http://localhost:3000",
+  credentials: true,
+};
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(cookieParser());
 
 app.use("/auth", authRoute);
 app.use("/todos", authMiddleware, todoRoute);
 
-const SECRET_KEY = process.env.AUTH_SECRET_KEY || "asdfg";
+const SECRET_KEY = "asdfg";
 app.get("/validateToken/:token", (req, res) => {
   console.log(token, "validate");
   const { token } = req.params;
@@ -31,7 +29,7 @@ app.get("/validateToken/:token", (req, res) => {
     return res.status(401).json({ message: "No token found" });
   }
   try {
-    const decoded = verifyAuthToken(token, process.env.SECRET_KEY);
+    const decoded = verifyAuthToken(token, SECRET_KEY);
     return res
       .status(200)
       .json({ message: "Token is valid", user: decoded, token });
@@ -39,6 +37,14 @@ app.get("/validateToken/:token", (req, res) => {
     // remote the cookie
     return res.status(401).json({ message: "Token is invalid" });
   }
+});
+
+app.get("/logout", (req, res) => {
+  return res.status(200).clearCookie("access_token", { path: "/" }).json({
+    message: "logged out successfully",
+    success: true,
+    data: null,
+  });
 });
 connectDB();
 app.listen(PORT, () => {

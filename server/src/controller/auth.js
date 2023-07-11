@@ -1,4 +1,5 @@
 import { User } from "../database/Schema/User";
+import { checkPass, hashPassword } from "../utils/auth.utils";
 import { generateAuthToken } from "../utils/token";
 
 export const signup = async (req, res) => {
@@ -11,11 +12,13 @@ export const signup = async (req, res) => {
         data: null,
       });
     }
+    const hashedPassword = await hashPassword(password);
+
     const createUser = await User.create({
       firstName,
       lastName,
       email,
-      password,
+      password: hashedPassword,
     });
     return res.status(200).json({
       message: "User created successfully",
@@ -41,15 +44,18 @@ export const login = async (req, res) => {
         data: null,
       });
     }
-    if (user.password !== password) {
+    const isCorrectPassword = await checkPass(password, user.password);
+    if (!isCorrectPassword) {
       return res.status(402).json({
         message: "Invalid user details",
         success: false,
         data: null,
       });
     }
+    console.log(user.Name);
     const token = generateAuthToken({
       email: email,
+      userName: user.Name,
       id: user.id,
     });
 
@@ -65,6 +71,7 @@ export const login = async (req, res) => {
         token: token,
         user: {
           email: email,
+          userName: user.Name,
         },
       });
   } catch (error) {
