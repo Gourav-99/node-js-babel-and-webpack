@@ -17,6 +17,10 @@ module.exports = {
       },
     ],
   },
+  devServer: {
+    // allowedHosts: [".csb.app"],
+    allowedHosts: "all",
+  },
   devtool: "source-map",
   plugins: [new NodemonPlugin()],
 };

@@ -26,7 +26,7 @@ const Header = ({
   const handleEdit = async (e) => {
     let updateTodo = todos.find((todo) => todo._id === currentEditItem);
     updateTodo.title = inputValue;
-    const updatedItem = await axios.patch(`/todos/${updateTodo._id}`, {
+    await axios.patch(`/todos/${updateTodo._id}`, {
       title: updateTodo.title,
     });
     setTodos((prevTodos) => [...prevTodos]);

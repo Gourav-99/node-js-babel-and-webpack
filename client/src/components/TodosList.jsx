@@ -32,7 +32,7 @@ const TodoList = ({ state: { token, user }, setState }) => {
     try {
       let updateTodo = todos.find((todo) => todo._id === id);
       updateTodo.isComplete = !updateTodo.isComplete;
-      const updateComplete = await axios.patch(`/todos/${id}`, {
+      await axios.patch(`/todos/${id}`, {
         isComplete: updateTodo.isComplete,
       });
       setTodos((prevTodos) => [...prevTodos]);

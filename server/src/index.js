@@ -11,7 +11,8 @@ import { verifyAuthToken } from "./utils/token";
 const app = express();
 const PORT = 8080;
 const corsOptions = {
-  origin: "http://localhost:3000",
+  // origin: "http://localhost:3000",
+  origin: "http://192.168.241.2:3000",
   credentials: true,
 };
 app.use(cors(corsOptions));
