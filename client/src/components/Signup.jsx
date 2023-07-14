@@ -1,19 +1,23 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import axios from "axios";
-const Signup = ({ state: { token } }) => {
+import { useSelector } from "react-redux";
+const Signup = () => {
   const navigate = useNavigate();
+  const { token } = useSelector((state) => state.auth);
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (token) {
       navigate("/login");
     }
   }, [token]);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [loading, setLoading] = useState(false);
+
   const handleSubmit = async (e) => {
     try {
       setLoading(true);
@@ -24,17 +28,15 @@ const Signup = ({ state: { token } }) => {
         email,
         password,
       });
-      console.log(res.status, "res.status");
-      console.log(res.data, "res.data");
+
       if (res.status === 200) {
+        alert("SIGNED UP SUCCESSFULLY");
         navigate("/login");
-      } else if (res.status === 400) {
-        alert(res.data.message); // Show alert message if user already exists
       } else {
         alert("Signup failed. Please try again later.");
       }
     } catch (error) {
-      console.log(error);
+      alert(error.response.data.message);
     } finally {
       setLoading(false);
     }

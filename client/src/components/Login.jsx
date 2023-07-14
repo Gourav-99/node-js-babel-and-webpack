@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
 
 import { Link, useNavigate } from "react-router-dom";
-const Login = ({ state: { token, user }, setState }) => {
+import { login } from "../actions/auth";
+const Login = () => {
   const navigate = useNavigate();
-  console.log(token, user, "its her");
+  const dispatch = useDispatch();
+  const { token } = useSelector((state) => state.auth);
   useEffect(() => {
     if (token) {
       navigate("/todos");
@@ -18,36 +20,9 @@ const Login = ({ state: { token, user }, setState }) => {
     try {
       setLoading(true);
       e.preventDefault();
-      console.log("yes");
-      const {
-        data: { token, user },
-        status,
-      } = await axios.post(
-        "http://localhost:8080/auth/login",
-        {
-          email,
-          password,
-        },
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-          withCredentials: true,
-        }
-      );
-
-      // console.log("token", token, "user", user);
-
-      // axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-      // localStorage.setItem("access_token", token);
-      setState({ token, user });
-      if (status === 200) {
-        navigate("/todos");
-      } else {
-        alert("!invalid credentials");
-      }
+      await dispatch(login(email, password));
     } catch (error) {
-      console.log("error", error);
+      console.log(error);
     } finally {
       setLoading(false);
     }

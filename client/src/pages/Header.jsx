@@ -1,35 +1,27 @@
-import axios from "axios";
 import React from "react";
+import { useDispatch } from "react-redux";
+import { addTodo, editTodo } from "../actions/todo";
 
 const Header = ({
-  todos,
-  setTodos,
   inputValue,
   setInputValue,
   isEditMode,
   setIsEditMode,
   currentEditItem,
 }) => {
+  const dispatch = useDispatch();
   const handleSubmit = async (e) => {
     try {
-      const addTodo = await axios.post("/todos/createTodo", {
-        title: inputValue,
-      });
-      if (addTodo.status === 200) {
-        setTodos(addTodo.data.data);
-      }
+      e.preventDefault();
+      await dispatch(addTodo(inputValue));
     } catch (error) {
-      console.log(error);
+      console.log(error.response.data.message);
     }
   };
 
   const handleEdit = async (e) => {
-    let updateTodo = todos.find((todo) => todo._id === currentEditItem);
-    updateTodo.title = inputValue;
-    const updatedItem = await axios.patch(`/todos/${updateTodo._id}`, {
-      title: updateTodo.title,
-    });
-    setTodos((prevTodos) => [...prevTodos]);
+    await dispatch(editTodo(inputValue, currentEditItem));
+
     setIsEditMode(!isEditMode);
   };
   const handleChange = (e) => {

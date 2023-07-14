@@ -1,16 +1,16 @@
-import axios from "axios";
 import React from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router";
-const Navbar = ({ state: { token, user }, setState, userName }) => {
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../actions/auth";
+const Navbar = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { token, user } = useSelector((state) => state.auth);
   const handleLogout = async () => {
-    const logout = await axios.get("/logout");
-    if (logout.status === 200) {
-      setState({ token: null, user: null });
-      alert("logged out successfully!");
-      navigate("/");
-    }
+    await dispatch(logout());
+    alert("logged out successfully!");
+    navigate("/");
   };
   return (
     <header className="sticky top-0 z-[100] drop-shadow-md bg-white w-full flex-none text-sm font-semibold leading-6 text-slate-900">

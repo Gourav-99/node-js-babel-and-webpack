@@ -1,8 +1,12 @@
 import React from "react";
-const List = ({ todos, handleComplete, handleDelete, handleEdit }) => {
+import { useDispatch, useSelector } from "react-redux";
+import { handleComplete, handleDelete } from "../actions/todo";
+const List = ({ handleEdit }) => {
+  const { todos } = useSelector((state) => state.todos);
+  const dispatch = useDispatch();
   return (
     <section>
-      {todos &&
+      {todos.length > 0 &&
         todos.map((todo) => {
           return (
             <div
@@ -12,7 +16,9 @@ const List = ({ todos, handleComplete, handleDelete, handleEdit }) => {
               <div className="inline-flex items-center space-x-2">
                 <div
                   className="check-complete"
-                  onClick={() => handleComplete(todo._id)}
+                  onClick={() =>
+                    dispatch(handleComplete(todo.isComplete, todo._id))
+                  }
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -46,7 +52,7 @@ const List = ({ todos, handleComplete, handleDelete, handleEdit }) => {
               <div className="flex justify-between">
                 <div
                   className="edit-btn mx-2"
-                  onClick={() => handleEdit(todo._id)}
+                  onClick={() => handleEdit(todo.title, todo._id)}
                 >
                   <svg
                     className="w-4 h-4 fill-current text-gray-500 hover:text-blue-700 hover:cursor-pointer"
@@ -66,7 +72,7 @@ const List = ({ todos, handleComplete, handleDelete, handleEdit }) => {
                 </div>
                 <div
                   className="remove-icon"
-                  onClick={() => handleDelete(todo._id)}
+                  onClick={() => dispatch(handleDelete(todo._id))}
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
